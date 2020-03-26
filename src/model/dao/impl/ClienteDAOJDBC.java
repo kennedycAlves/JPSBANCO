@@ -86,7 +86,7 @@ public class ClienteDAOJDBC implements ClienteDAO {
 			conn = DB.getConnection();
 			st = (PreparedStatement) conn.prepareStatement(
 					"UPDATE CLIENTE "
-				+ "SET ENDERECO = ?, AGENCIA = ?, CONTA = ?,  LIMITE = ?  "
+				+ "SET ENDERECO = ?, AGENCIA = ?, CONTA = ?,  LIMITE = ?, LIMITELIBERADO = ?  "
 				+ "WHERE CPF = ?"
 				);
 			
@@ -95,7 +95,8 @@ public class ClienteDAOJDBC implements ClienteDAO {
 			st.setInt(2, obj.getAgencia());
 			st.setInt(3, obj.getconta());
 			st.setFloat(4, obj.getLimite());
-			st.setString(5, obj.getCpf());
+			st.setFloat(5, obj.getLimiteLiberado());
+			st.setString(6, obj.getCpf());
 			
 			
 			int modiline = st.executeUpdate();	

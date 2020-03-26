@@ -59,6 +59,7 @@ public class atualizarCliente extends HttpServlet {
 		int agencia = 0; 	
 		int conta = 0; 	
 		float limite = 0;	
+		float limiteLiberado = 0 ;
 		
 			
 		response.setContentType("text/html");
@@ -104,13 +105,24 @@ public class atualizarCliente extends HttpServlet {
 			}
 			
 			
-			if(RecebeLimite == "") {
+			//if(RecebeLimite == "") {
 				limite = rsResultado.getFloat("LIMITE");
-			}else {
-				 limite = Float.parseFloat(RecebeLimite);		
-			}
+			//}else {
+			//	 limite = Float.parseFloat(RecebeLimite);		
+			//}
 			
+			if(RecebeLimite == "") {
+				limiteLiberado = rsResultado.getFloat("LIMITELIBERADO");
+			}else {
+				 limiteLiberado = Float.parseFloat(RecebeLimite);	
 				
+			}
+			float recalc;
+			if(limiteLiberado > limite) {
+				 recalc = limiteLiberado - limite;
+			}else {
+				recalc = limiteLiberado; 
+			}
 			
 			//Termina valida e recuperação dos dados
 			
@@ -118,7 +130,7 @@ public class atualizarCliente extends HttpServlet {
 			
 			
 			//Com od dados recuperados e os novos dados vindo do formulario o update é feito
-			Cliente cliente = new Cliente(RecebeEndereco, agencia, conta, limite, cpf);
+			Cliente cliente = new Cliente(RecebeEndereco, agencia, conta, recalc, limiteLiberado, cpf);
 			sellerdao.update(cliente);
 			
 			out.println("<h2> Dados Atualizados</h2><br>");
@@ -148,7 +160,7 @@ public class atualizarCliente extends HttpServlet {
 			out.println("</tr>");
 			out.println("<tr>");
 			out.println("<th>Limite</th>");
-			out.println("<td>"+rsResultado2.getString("LIMITE")+"</td>");
+			out.println("<td>"+rsResultado2.getString("LIMITELIBERADO")+"</td>");
 			out.println("<tr>");
 			out.println("</table>");
 			out.println("<br>");

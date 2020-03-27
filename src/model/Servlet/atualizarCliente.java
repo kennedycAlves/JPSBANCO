@@ -126,7 +126,6 @@ public class atualizarCliente extends HttpServlet {
 			
 			//Termina valida e recuperação dos dados
 			
-			out.println(recalc);
 			
 			
 			//Com od dados recuperados e os novos dados vindo do formulario o update é feito

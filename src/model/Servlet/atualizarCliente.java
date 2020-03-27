@@ -119,14 +119,14 @@ public class atualizarCliente extends HttpServlet {
 			}
 			float recalc;
 			if(limiteLiberado > limite) {
-				 recalc = limiteLiberado - limite;
+				 recalc = (limiteLiberado - limite) + limite;
 			}else {
 				recalc = limiteLiberado; 
 			}
 			
 			//Termina valida e recuperação dos dados
 			
-			
+			out.println(recalc);
 			
 			
 			//Com od dados recuperados e os novos dados vindo do formulario o update é feito

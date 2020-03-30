@@ -100,6 +100,8 @@ public class Operacoes extends HttpServlet {
 				out.println("</tr>");
 				out.println("</table>");
 				out.println("<br>");
+				out.println("<a href='operacoes.jsp'> Voltar</a>");
+				out.println("<a href='executaLogin'>Sair</a>");
 	    	
 	    	}catch (Exception e) {
 					out.println(e);
@@ -170,6 +172,8 @@ public class Operacoes extends HttpServlet {
 				out.println("</tr>");
 				out.println("</table>");
 				out.println("<br>");
+				out.println("<a href='operacoes.jsp'> Voltar</a>");
+				out.println("<a href='executaLogin'>Sair</a>");
 	    	
 	    	}catch (Exception e) {
 					out.println(e);
@@ -177,6 +181,80 @@ public class Operacoes extends HttpServlet {
 	    	
 	    	out.println("</body>");
 			out.println("</html>");
+		}
+		
+		
+if(tipoOperacao == 3) {
+			
+			
+			
+			PrintWriter out = response.getWriter();
+			out.println("<!DocType html>");
+	    	out.println("<html>");
+	    	out.println("<head>");
+	    	out.println("<title>Tranferência</title>");
+	    	out.println("</head>");
+	    	out.println("<body>");
+	    	out.println(cpf);
+	    	out.println("<form name='formDeposito' action='Operacoes' method='post'>");
+	    	out.println("<p>CPF do beneficiário<input type='text' name='cpfTransfer'></p><br>");
+	    	out.println("<p>Valor do Transferência<input name='valor' type='number' id='quantity'></p>");
+	    	out.println("<input type='submit' name='btrPesquisar' value='Transferir'/>");
+	    	out.println("</form>"); 
+	    	out.println("<br>");
+	    	
+	    	try{
+				
+				ResultSet rsResultado2;
+				Cliente cliente = new Cliente();
+				ClienteDAO clientedao = DaoFactory.creteClienteDAO();
+		
+				
+				rsResultado2 = clientedao.FindByCPF(cpfCLI);
+				
+				out.println("<table border='1'>");
+				out.println("<tr>");
+				out.println("<th>CPF</th>");
+				out.println("<td>"+rsResultado2.getString("CPF")+"</td>");
+				out.println("</tr>");
+				out.println("<tr>");
+				out.println("<th>Nome</th>");
+				out.println("<td>"+rsResultado2.getString("NOME")+"</td>"); 
+				out.println("</tr>");
+				out.println("<tr>");
+				out.println("<th>Endereço</th>");
+				out.println("<td>"+rsResultado2.getString("ENDERECO")+"</td>"); 
+				out.println("</tr>");
+				out.println("<tr>");
+				out.println("<th>Agencia</th>");
+				out.println("<td>"+rsResultado2.getString("AGENCIA")+"</td>"); 
+				out.println("</tr>");
+				out.println("<tr>");
+				out.println("<th>Conta</th>");
+				out.println("<td>"+rsResultado2.getString("CONTA")+"</td>"); 
+				out.println("</tr>");
+				out.println("<tr>");
+				out.println("<th>Limite</th>");
+				out.println("<td>"+rsResultado2.getString("LIMITE")+"</td>");
+				out.println("</tr>");
+				out.println("<tr>");
+				out.println("<th>Saldo</th>");
+				out.println("<td>"+rsResultado2.getString("SALDO")+"</td>");
+				out.println("</tr>");
+				out.println("</table>");
+				out.println("<br>");
+				out.println("<a href='operacoes.jsp'> Voltar</a>");
+				out.println("<a href='executaLogin'>Sair</a>");
+	    	
+	    	}catch (Exception e) {
+					out.println(e);
+	    	}
+	    	
+	    	out.println("</body>");
+			out.println("</html>");
+	    	
+			
+			
 		}
 		
 	}
@@ -217,8 +295,8 @@ public class Operacoes extends HttpServlet {
 		    	out.println("<title>Deposito</title>");
 		    	out.println("</head>");
 		    	out.println("<body>");
-		    	out.println(cliente.depositar(cliente, valor));
-		    	out.println("<p>Limite atualizado");
+		    	out.println(cliente.depositar(cliente, valor, 1));
+		    	out.println("<p>Limite atualizado</p>");
 		    	out.println(cpfCLI);
 		    	out.print(cliente.getSaldo());
 		    	out.println("</body>");
@@ -262,8 +340,8 @@ public class Operacoes extends HttpServlet {
 		    	out.println("<title>Saque</title>");
 		    	out.println("</head>");
 		    	out.println("<body>");
-		    	out.println(cliente.sacar(cliente, valor));
-		    	out.println("<p>Saldo atualizado");
+		    	out.println(cliente.sacar(cliente, valor, 2));
+		    	out.println("<p>Saldo atualizado</p>");
 		    	out.println(cpfCLI);
 		    	out.print(cliente.getSaldo());
 		    	out.println("</body>");
@@ -280,6 +358,93 @@ public class Operacoes extends HttpServlet {
 			}
 			
 		}
+		
+		if(tipooper == 3) {
+			Float valor = Float.parseFloat(request.getParameter("valor"));
+			String cpfTranfer = request.getParameter("cpfTransfer");
+			PrintWriter out = response.getWriter();
+			
+			try{
+				
+				ResultSet rsResultado;
+				ResultSet rsResultado2;
+				Cliente cliente = new Cliente();
+				Cliente clienteTransfer = new Cliente();
+				ClienteDAO clientedao = DaoFactory.creteClienteDAO();
+							
+			
+				cliente.setCpf(cpfCLI);
+				clienteTransfer.setCpf(cpfTranfer);
+				
+				
+				
+				rsResultado = clientedao.FindByCPF(cpfCLI);
+				rsResultado2 = clientedao.FindByCPF(cpfTranfer);
+				
+				
+				cliente.setSaldo(rsResultado.getFloat("SALDO"));
+				cliente.setLimite(rsResultado.getFloat("LIMITE"));
+				
+				
+				clienteTransfer.setLimiteLiberado(rsResultado2.getFloat("LIMITELIBERADO"));
+				clienteTransfer.setSaldo(rsResultado2.getFloat("SALDO"));
+				clienteTransfer.setLimite(rsResultado2.getFloat("LIMITE"));
+				
+				clienteTransfer.setAgencia(rsResultado2.getInt("CONTA"));
+				clienteTransfer.setConta(rsResultado2.getInt("AGENCIA"));
+				clienteTransfer.setNome(rsResultado2.getString("NOME"));
+				
+					
+				
+				out.println("<!DocType html>");
+		    	out.println("<html>");
+		    	out.println("<head>");
+		    	out.println("<title>Deposito</title>");
+		    	out.println("</head>");
+		    	out.println("<body>");
+		    	out.println(cliente.sacar(cliente, valor, 3));
+		    	out.println(valor);
+		    	out.println(clienteTransfer.depositar(clienteTransfer, valor, 3));
+		    	clientedao.updateSaldo(cliente);
+		    	clientedao.updateSaldo(clienteTransfer);
+		    	out.println("<table border='1'>");
+				out.println("<tr>");
+				out.println("<th>CPF</th>");
+				out.println("<td>"+rsResultado2.getString("CPF")+"</td>");
+				out.println("</tr>");
+				out.println("<tr>");
+				out.println("<th>Nome</th>");
+				out.println("<td>"+rsResultado2.getString("NOME")+"</td>"); 
+				out.println("</tr>");
+				out.println("<tr>");
+				out.println("<th>Agencia</th>");
+				out.println("<td>"+rsResultado2.getString("AGENCIA")+"</td>"); 
+				out.println("</tr>");
+				out.println("<tr>");
+				out.println("<th>Conta</th>");
+				out.println("<td>"+rsResultado2.getString("CONTA")+"</td>"); 
+				out.println("</tr>");
+				out.println("</table>");
+				out.println("<br>");
+				out.println("<a href='operacoes.jsp'> Voltar</a>");
+				out.println("<a href='executaLogin'>Sair</a>");
+		       	out.println("<p>Limite atualizado</p>");
+		    	out.print(cliente.getSaldo());
+		    	out.println("</body>");
+		    	out.println("</html>");
+		    	
+		    	
+		    	
+				
+				
+				
+			}catch (Exception e) {
+				out.println(e);
+				
+			}
+			
+		}
+
 		
 	
 	}

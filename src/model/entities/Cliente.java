@@ -132,7 +132,7 @@ public class Cliente extends ClassPessoaBanco{
 			
 
 	
-	public String sacar(Cliente obj, float valor) {
+	public String sacar(Cliente obj, float valor, int oper) {
 		
 		String mensagem = null;
 		
@@ -146,7 +146,13 @@ public class Cliente extends ClassPessoaBanco{
 				System.out.println("primeiro if");	
 				System.out.println(obj.getSaldo());
 				obj.setSaldo(-valor);
-				mensagem = "Saque realizado com sucesso";
+				if (oper == 2) {
+					mensagem = "Saque realizado com sucesso";
+					
+				}if (oper == 3) {
+					mensagem = "Foram tranferidos ";
+					
+				}
 			
 			} else if(obj.getSaldo() < valor && obj.getLimite() >= valor || (obj.getSaldo() + obj.getLimite() >= valor)) {
 				System.out.println("Segundo if");	
@@ -166,7 +172,14 @@ public class Cliente extends ClassPessoaBanco{
 				
 				
 				obj.setLimite(var3);
-				mensagem = "Saque realizado com sucesso";
+				if (oper == 2) {
+					mensagem = "Saque realizado com sucesso";
+					
+				}if (oper == 3) {
+					mensagem = "Foram tranferidos ";
+					
+				}
+				
 				
 				
 			}
@@ -181,7 +194,7 @@ public class Cliente extends ClassPessoaBanco{
 		
 	}
 	
-	 public  String  depositar(Cliente obj, float valor) {
+	 public  String  depositar(Cliente obj, float valor, int oper) {
 		 
 		String menssagem = null;
 		
@@ -195,7 +208,11 @@ public class Cliente extends ClassPessoaBanco{
 				obj.setSaldo(valor - var);
 			}
 			
-		menssagem = "Depósito realizado com sucesso!";	
+		if(oper == 1) {
+			menssagem = "Depósito realizado com sucesso!";	
+		}if(oper == 3) {
+			menssagem = "Para a conta: ";
+		}
 			
 		} else {
 			System.out.println(obj.getSaldo());
@@ -203,7 +220,11 @@ public class Cliente extends ClassPessoaBanco{
 			System.out.println("Caiu no segundo if");
 			System.out.println(obj.getSaldo());
 			
-			menssagem = "Depósito realizado com sucesso!";	
+			if(oper == 1) {
+				menssagem = "Depósito realizado com sucesso!";	
+			}if(oper == 3) {
+				menssagem = "Para a conta: ";
+			}	
 			
 			}	
 		return menssagem;

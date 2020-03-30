@@ -86,7 +86,8 @@ public class todos_clientes extends HttpServlet {
     		}
     		
     		out.println("</table>");
-    		
+    		out.println("<a href='executaLogin'>[Sair]</a>");
+    		out.println("<a href='pesquisar_cliente.jsp'> [Nova Pesquisa]</a>");
     		
     		
     		

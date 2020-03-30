@@ -44,6 +44,9 @@ out.println("<p>Limite atual: "+cliente.getLimite()+"<br> Novo Limite:<input nam
 out.println("<br>");
 out.println("<input name='btnConfirmar' value='Atualizar' type='submit'>");
 out.println("</form>");
+out.println("<a href='executaLogin'>[Sair]</a>");
+
+
 
 
 %>

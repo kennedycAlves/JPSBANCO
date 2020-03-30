@@ -18,7 +18,7 @@ out.println("<h2  style='text-align: center;'> Operações</h2>");
 out.println("<p>");
 out.println("<input name='TipoOperacao' value='1' type='radio'/>Realizar Deposito");
 out.println("<input name='TipoOperacao' value='2' type='radio'/>Realizar Saque");
-out.println("<input name='TipoOperacao' value='3' type='radio'/>Verificar Saldo<br>");
+out.println("<input name='TipoOperacao' value='3' type='radio'/>Transferir Dinheiro<br>");
 //out.println("<input name='cpf' value='"+cpf+"' type='hidden'/>");
 out.println("<input  type='submit'  value='Realizar'/>");
 

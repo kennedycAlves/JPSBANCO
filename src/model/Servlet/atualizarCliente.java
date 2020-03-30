@@ -163,7 +163,7 @@ public class atualizarCliente extends HttpServlet {
 			out.println("<tr>");
 			out.println("</table>");
 			out.println("<br>");
-			out.println("<a href=pesquisarUsuario.html>[Pesquisar novo usuário]</a>");
+			out.println("<a href=pesquisar_cliente.jsp>[Pesquisar novo usuário]</a>");
 			out.println("<a href='editar_usuario.jsp?cpf="+cpf+"'>[Refazer atualizaçoes]</a>");
 			
 			

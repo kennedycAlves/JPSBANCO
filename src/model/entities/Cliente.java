@@ -39,8 +39,8 @@ public class Cliente extends ClassPessoaBanco{
 		
 	}
 	
-	public Cliente(String endereco,  Integer agencia, Integer conta, float limite,float limiteLiberado, String cpf) {
-		super (endereco, cpf);
+	public Cliente(String nome, String endereco,  Integer agencia, Integer conta, float limite,float limiteLiberado, String cpf) {
+		super (nome, cpf, endereco);
 		this.agencia = agencia;
 		this.conta = conta;
 		this.limite = limite;

@@ -126,10 +126,10 @@ public class atualizarCliente extends HttpServlet {
 			
 			//Termina valida e recuperação dos dados
 			
-			
+			String nome =  null;
 			
 			//Com od dados recuperados e os novos dados vindo do formulario o update é feito
-			Cliente cliente = new Cliente(RecebeEndereco, agencia, conta, recalc, limiteLiberado, cpf);
+			Cliente cliente = new Cliente(nome, RecebeEndereco, agencia, conta, recalc, limiteLiberado, cpf);
 			sellerdao.update(cliente);
 			
 			out.println("<h2> Dados Atualizados</h2><br>");

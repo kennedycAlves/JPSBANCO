@@ -79,9 +79,10 @@ public class inserirCliente extends HttpServlet {
     	out.println("<body>");
 		
 		try {
+			out.println(nome);
 			ClienteDAO sellerdao = DaoFactory.creteClienteDAO();
-			
-			Cliente cliente = new Cliente(nome, endereco, cpf, agencia, conta, limite);
+			float limiteLiberado = limite;
+			Cliente cliente = new Cliente(nome, endereco, agencia, conta, limite, limiteLiberado, cpf);
 			
 			sellerdao.insert(cliente);
 							

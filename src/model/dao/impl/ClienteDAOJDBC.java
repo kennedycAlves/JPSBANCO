@@ -42,7 +42,7 @@ public class ClienteDAOJDBC implements ClienteDAO {
 			conn = DB.getConnection();
 			
 			
-			String sql = ("INSERT INTO CLIENTE (NOME, ENDERECO, CPF, AGENCIA, CONTA, LIMITE, LIMITELIBERADO, SALDO) values (?, ?, ?, ?, ?, ?, ?, ?)");
+			String sql = ("INSERT INTO CLIENTE (NOME, ENDERECO, CPF, AGENCIA, CONTA, LIMITE, LIMITELIBERADO, SALDO, F_MATRICULA) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 									
 			
 			st = (PreparedStatement) conn.prepareStatement(sql);
@@ -55,6 +55,7 @@ public class ClienteDAOJDBC implements ClienteDAO {
 			st.setFloat(6, obj.getLimite());
 			st.setFloat(7, obj.getLimiteLiberado());
 			st.setFloat(8, 0);
+			st.setInt(9, obj.getFuncionario());
 			
 			
 			st.executeUpdate();

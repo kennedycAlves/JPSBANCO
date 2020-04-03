@@ -146,7 +146,8 @@ public class executaLogin extends HttpServlet {
 					//A linha abaixo torna o atributo CPF visivel todos os Servlets da aplicação.
 					//getServletContext().setAttribute("cpf", matricula);
 					out.println("<a href='pesquisar_cliente.jsp'>[Gerenciar Clientes]</a>");
-					out.println("<a href='cadastro.html'>[Cadastrar novo Cliente]</a>");
+					out.println("<a href='cadastro.jsp'>[Cadastrar novo Cliente]</a>");
+					out.println("<a href='cadastroFuncionario.html'>[Cadastrar novo Funcionário]</a>");
 					
 					
 				

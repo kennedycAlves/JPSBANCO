@@ -3,6 +3,7 @@ package model.Servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -16,6 +17,7 @@ import model.entities.Cliente;
 import model.entities.Funcionario;
 import db.DB;
 import db.DbException;
+import model.dao.AgenciaDAO;
 import model.dao.ClienteDAO;
 import model.dao.DaoFactory;
 import model.dao.impl.ClienteDAOJDBC;
@@ -53,17 +55,19 @@ public class inserirCliente extends HttpServlet {
 			throws ServletException, IOException {
 		Integer agencia, conta;
 		Float saldo, limite;
-		String nome, endereco, cpf;
+		String cpf;
+		String nome, endereco;
 		PrintWriter out;
-		Funcionario gerente = null;
+		Funcionario gerente;
 		
-		String teste;
+		
 
 		nome = request.getParameter("nome");
 		endereco = request.getParameter("endereco");
 		cpf = request.getParameter("cpf");
 		agencia = Integer.parseInt(request.getParameter("agencia"));
-		conta = Integer.parseInt(request.getParameter("conta"));
+		conta = Integer.parseInt(request.getParameter("agencia"));
+		conta +=1;
 		limite = Float.parseFloat(request.getParameter("limite"));
 		
 		
@@ -81,16 +85,24 @@ public class inserirCliente extends HttpServlet {
 		try {
 			out.println(nome);
 			ClienteDAO sellerdao = DaoFactory.creteClienteDAO();
+			AgenciaDAO agedao = DaoFactory.creteAgenciaDAO();
+			
+			ResultSet rsResultado = agedao.findByCOD(agencia);
+			
+			Integer funcionario = rsResultado.getInt("F_MATRICULA");
+			
 			float limiteLiberado = limite;
-			Cliente cliente = new Cliente(nome, endereco, agencia, conta, limite, limiteLiberado, cpf);
+			
+			
+			Cliente cliente = new Cliente(nome, endereco, agencia, conta, limite, limiteLiberado, cpf, funcionario);
 			
 			sellerdao.insert(cliente);
 							
 			out.println("<h2>Usuário cadastrado</h2>");	
 							
-			}catch (Exception e) {
+		}catch (Exception e) {
 				out.println(e);
-			}	
+		}	
 		
 		out.println("</body>");
 		out.println("</html>");

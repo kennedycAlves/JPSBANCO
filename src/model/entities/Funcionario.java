@@ -33,32 +33,4 @@ public class Funcionario extends ClassPessoaBanco{
 	}
 
 
-	
-
-	
-
-
-	
-
-
-
-
-
-	
-
-
-
-
-
-
-
-	
-
-	
-
-	
-	
-	
-	
-
 }

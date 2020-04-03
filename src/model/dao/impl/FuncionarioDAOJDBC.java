@@ -27,7 +27,7 @@ public class FuncionarioDAOJDBC implements FuncionarioDAO{
 
 	@Override
 	public void insert(Funcionario obj) {
-PreparedStatement st = null;
+		PreparedStatement st = null;
 		
 		
 		try {
@@ -83,16 +83,22 @@ PreparedStatement st = null;
 		
 	}
 
-	@Override
-	public Funcionario findByid(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
-	public List<Funcionario> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultSet findAll() {
+		PreparedStatement psComando;
+		ResultSet rsResultado;
+		String sqlComando = "SELECT * FROM FUNCIONARIO ORDER BY NOME";
+		
+		try {
+			psComando = (PreparedStatement) conn.prepareStatement(sqlComando);
+			rsResultado = psComando.executeQuery();
+			return rsResultado;
+		}catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+
 	}
 	
 	@Override
@@ -132,6 +138,16 @@ PreparedStatement st = null;
 		return rs;
 
 	}
+
+
+	@Override
+	public Funcionario findByid(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	
 
 
 }

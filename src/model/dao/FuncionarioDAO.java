@@ -11,10 +11,8 @@ public interface FuncionarioDAO {
 	void update(Funcionario obj);
 	void deleteById(Integer id);
 	Funcionario findByid(Integer id);
-	List<Funcionario> findAll();
+	ResultSet findAll();
 	ResultSet login(Integer matricula);
-	
-	
 	
 
 }

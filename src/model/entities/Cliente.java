@@ -11,7 +11,7 @@ public class Cliente extends ClassPessoaBanco{
 	private float saldo, limite, limiteLiberado;
 	private static float SALDOLIMITE;
 	
-	private Funcionario funcionario;
+	private Integer funcionario;
 	
 	public Cliente() {
 		
@@ -37,14 +37,16 @@ public class Cliente extends ClassPessoaBanco{
 		this.limite = limite;
 		
 		
+		
 	}
 	
-	public Cliente(String nome, String endereco,  Integer agencia, Integer conta, float limite,float limiteLiberado, String cpf) {
+	public Cliente(String nome, String endereco,  Integer agencia, Integer conta, float limite,float limiteLiberado, String cpf, Integer funcionario) {
 		super (nome, cpf, endereco);
 		this.agencia = agencia;
 		this.conta = conta;
 		this.limite = limite;
 		this.limiteLiberado = limiteLiberado;
+		this.funcionario = funcionario;
 		
 		
 	}
@@ -52,6 +54,20 @@ public class Cliente extends ClassPessoaBanco{
 	
 	
 	
+	public int getFuncionario() {
+		return funcionario;
+	}
+
+
+
+
+	public void setFuncionario(int funcionario) {
+		this.funcionario = funcionario;
+	}
+
+
+
+
 	public Integer getAgencia() {
 		return this.agencia;
 	}
@@ -112,24 +128,6 @@ public class Cliente extends ClassPessoaBanco{
 //	}
 	
 	
-	
-
-	public Funcionario getFuncionario() {
-		return funcionario;
-	}
-
-
-
-
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
-	}
-
-
-
-
-
-			
 
 	
 	public String sacar(Cliente obj, float valor, int oper) {
@@ -244,7 +242,7 @@ public class Cliente extends ClassPessoaBanco{
 	@Override
 	public String toString() {
 		return "Cliente [agencia=" + agencia + ", conta=" + conta + ", saldo=" + saldo + ", limite=" + limite
-				+ ", Gerente=" + funcionario + "]" + funcionario.getMatricula() + " " ;
+				+ ", Gerente=" + funcionario + "] " ;
 	}
 
 			

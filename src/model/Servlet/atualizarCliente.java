@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.entities.Cliente;
 import db.*;
 import model.dao.impl.ClienteDAOJDBC;
+import model.dao.AgenciaDAO;
 import model.dao.ClienteDAO;
 import model.dao.DaoFactory;
 
@@ -56,10 +57,11 @@ public class atualizarCliente extends HttpServlet {
 		RecebeConta = request.getParameter("conta");
 		RecebeLimite =request.getParameter("limite");
 		
-		int agencia = 0; 	
-		int conta = 0; 	
-		float limite = 0;	
-		float limiteLiberado = 0 ;
+		Integer agencia; 	
+		Integer conta; 	
+		Integer funcionario;
+		Float limite;	
+		Float limiteLiberado;
 		
 			
 		response.setContentType("text/html");
@@ -70,6 +72,8 @@ public class atualizarCliente extends HttpServlet {
     	out.println("<title>Atualizar cliente</title>");
     	out.println("</head>");
     	out.println("<body>");
+    	
+    	out.println("          "+RecebeAgencia+"      ");
 		
 		
 		try {
@@ -92,8 +96,13 @@ public class atualizarCliente extends HttpServlet {
 			
 			if(RecebeAgencia == "") {
 				agencia = rsResultado.getInt("AGENCIA");
+				funcionario = rsResultado.getInt("F_MATRICULA");
 			}else {
-				agencia = Integer.parseInt(RecebeAgencia);
+				agencia = Integer.parseInt(request.getParameter("agencia"));
+				AgenciaDAO agedao = DaoFactory.creteAgenciaDAO();
+				
+				ResultSet rsResultado2 = agedao.findByCOD(agencia);
+				funcionario = rsResultado2.getInt("F_MATRICULA");
 			}
 			
 			

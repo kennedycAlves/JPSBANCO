@@ -85,9 +85,9 @@ public class executaLogin extends HttpServlet {
 					//out.println("<a href=\""+response.encodeURL("operacoes.jsp?cpf="+cpf+"")+"\">Realizar Operações</a>");
 					//A linha abaixo torna o atributo CPF visivel todos os Servlets da aplicação.
 					getServletContext().setAttribute("cpf", cpf);
-					out.println("<a href='operacoes.jsp'>Realizar Operações</a>");
+					//out.println("<a href='operacoes.jsp'>Realizar Operações</a>");
 					
-					
+					response.sendRedirect("operacoes.jsp");
 				
 				
 				}else {
@@ -213,7 +213,7 @@ public class executaLogin extends HttpServlet {
 		out.println("<a href='login.jsp'> Voltar a tela de login</a>");
 		
 		HttpSession sessao = request.getSession();
-		sessao.setAttribute("usuario_logado", null);
+		sessao.setAttribute("usuario_logado", "null");
 		sessao.invalidate();
 		
 		out.println("</body>");

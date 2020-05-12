@@ -132,6 +132,7 @@ public class Cliente extends ClassPessoaBanco{
 	
 	public String sacar(Cliente obj, float valor, int oper) {
 		
+	  try {
 		String mensagem = null;
 		
 		if(valor <= (obj.getSaldo() + obj.getLimite())) {
@@ -189,6 +190,9 @@ public class Cliente extends ClassPessoaBanco{
 			
 		}
 		return mensagem;
+		}catch(NumberFormatException e) {
+			return e.getMessage() + "Formato de dados inseridos incompatível!";
+		}
 		
 	}
 	
@@ -196,6 +200,7 @@ public class Cliente extends ClassPessoaBanco{
 		 
 		String menssagem = null;
 		
+	 try {
 		if (obj.getLimite() < obj.getLimiteLiberado()) { 	
 		 	if((valor + obj.getLimite()) < obj.getLimiteLiberado()) {
 		 		float var = obj.getLimite() + valor;
@@ -226,6 +231,9 @@ public class Cliente extends ClassPessoaBanco{
 			
 			}	
 		return menssagem;
+	 }catch(NumberFormatException e) {
+		 return e.getMessage() + " Formato de dados inseridos incompatível";
+	 }
 
 	}
 	 

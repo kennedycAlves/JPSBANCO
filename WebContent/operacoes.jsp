@@ -15,28 +15,31 @@
 HttpSession sessao = request.getSession();
 String statusSessao = (String) sessao.getAttribute("usuario_logado");
 
+
 if(statusSessao.equals("true")){
-
-	String cpf = (String) request.getAttribute("cpf");
-	out.println("<form  name='formCalculoAreas' method='get' action='Operacoes'>");
-	
-	out.println("<h2  style='text-align: center;'> Operações</h2>");
-	out.println("<p>");
-	out.println("<input name='TipoOperacao' value='1' type='radio'/>Realizar Deposito");
-	out.println("<input name='TipoOperacao' value='2' type='radio'/>Realizar Saque");
-	out.println("<input name='TipoOperacao' value='3' type='radio'/>Transferir Dinheiro<br>");
-	//out.println("<input name='cpf' value='"+cpf+"' type='hidden'/>");
-	out.println("<input  type='submit'  value='Realizar'/>");
-	
-	out.println("</p>");
-	out.println("</form>");
-	out.println(cpf);
-	out.println("<br><br>");
-	out.println("<a href='executaLogin'>Sair</a>");
-}else{
-	out.println("Usuário não autenticado");
-	response.sendRedirect("login.jsp");
-
+		
+	 
+		out.println(statusSessao);
+		String cpf = (String) request.getAttribute("cpf");
+		out.println("<form  name='formCalculoAreas' method='get' action='Operacoes'>");
+		
+		out.println("<h2  style='text-align: center;'> Operações</h2>");
+		out.println("<p>");
+		out.println("<input name='TipoOperacao' value='1' type='radio'/>Realizar Deposito");
+		out.println("<input name='TipoOperacao' value='2' type='radio'/>Realizar Saque");
+		out.println("<input name='TipoOperacao' value='3' type='radio'/>Transferir Dinheiro<br>");
+		//out.println("<input name='cpf' value='"+cpf+"' type='hidden'/>");
+		out.println("<input  type='submit'  value='Realizar'/>");
+		
+		out.println("</p>");
+		out.println("</form>");
+		out.println(cpf);
+		out.println("<br><br>");
+		out.println("<a href='executaLogin'>Sair</a>");
+}
+if(!statusSessao.equals("true")){
+	  out.println("Usuário não autenticado");
+	  response.sendRedirect("executaLogin");
 }
 
 %>

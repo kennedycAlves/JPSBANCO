@@ -8,6 +8,12 @@
 </head>
 <body>
 <%
+HttpSession sessao = request.getSession();
+String statusSessao = (String) sessao.getAttribute("usuario_logado");
+
+if(!statusSessao.equals("true")){
+	response.sendRedirect("executaLogin");
+}
 out.println("<form name='pesquisar' method='post' action='pesquisarUser'>");
 out.println("<p>CPF do Cliente: <input name='cpf' type='text' maxlength='20' size='20'></p>");
 out.println("<input type='submit' name='btrPesquisar' value='Pesquisar'/>");

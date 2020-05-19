@@ -46,6 +46,7 @@ public class executaLogin extends HttpServlet {
 		
 		
 		if (tipoLogin == 1) {
+			
 		
 			ResultSet rsResultado = null;
 		
@@ -98,7 +99,8 @@ public class executaLogin extends HttpServlet {
 	    	
 			}catch(Exception e) {
 				DbException var = new DbException("<p>Usuário ou senhas inválidos</p><a href='login.jsp'>Tentar Novamente</a>");
-				 out.print(var);
+				//getServletContext().setAttribute("usuario_logado", "false");  
+				out.print(var);
 			}	
     	
 			out.println("</body>");
@@ -147,7 +149,8 @@ public class executaLogin extends HttpServlet {
 					//getServletContext().setAttribute("cpf", matricula);
 					out.println("<a href='pesquisar_cliente.jsp'>[Gerenciar Clientes]</a>");
 					out.println("<a href='cadastro.jsp'>[Cadastrar novo Cliente]</a>");
-					out.println("<a href='cadastroFuncionario.html'>[Cadastrar novo Funcionário]</a>");
+					out.println("<a href='cadastroFuncionario.html'>[Cadastrar novo Funcionário]</a><br>");
+					out.println("<a href='cadastro-agencias.jsp'>[Cadastrar nova Agencia]</a>");
 					
 					
 				
@@ -161,7 +164,8 @@ public class executaLogin extends HttpServlet {
 	    	
 			}catch(Exception e) {
 				DbException var = new DbException("<p>Usuário ou senhas inválidos</p><a href='login.jsp'>Tentar Novamente</a>");
-				 out.print(var);
+				//getServletContext().setAttribute("usuario_logado", "false"); 
+				out.print(var);
 				 
 				 
 			}	
@@ -213,7 +217,8 @@ public class executaLogin extends HttpServlet {
 		out.println("<a href='login.jsp'> Voltar a tela de login</a>");
 		
 		HttpSession sessao = request.getSession();
-		sessao.setAttribute("usuario_logado", "null");
+		sessao.setAttribute("usuario_logado", "false");
+		getServletContext().setAttribute("usuario_logado", "false");
 		sessao.invalidate();
 		
 		out.println("</body>");

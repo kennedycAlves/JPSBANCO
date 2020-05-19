@@ -12,6 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import db.*;
 import model.entities.Cliente;
 import model.dao.ClienteDAO;
@@ -44,6 +46,14 @@ public class todos_clientes extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession sessao = request.getSession();
+		String statusSessao = (String) sessao.getAttribute("usuario_logado");
+		 
+		if(statusSessao.contentEquals("false") || statusSessao == null) {
+			  response.sendRedirect("login.jsp");
+		 }
+		
 		ResultSet rsResultado = null;
 		
 		PrintWriter out;

@@ -14,6 +14,12 @@
 </head>
 <body>
 <%
+HttpSession sessao = request.getSession();
+String statusSessao = (String) sessao.getAttribute("usuario_logado");
+
+if(!statusSessao.equals("true")){
+	response.sendRedirect("executaLogin");
+}
 String cpf = request.getParameter("cpf");
 
 try{

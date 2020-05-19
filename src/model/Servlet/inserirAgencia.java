@@ -10,6 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import model.entities.Agencia;
 import model.dao.AgenciaDAO;
 import model.dao.DaoFactory;
@@ -42,6 +44,15 @@ public class inserirAgencia extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		  
+		HttpSession sessao = request.getSession();
+		String statusSessao = (String) sessao.getAttribute("usuario_logado");
+		 
+		if(statusSessao.contentEquals("false") || statusSessao == null) {
+			  response.sendRedirect("login.jsp");
+		 }
+		
 		Integer cod, gerente;
 		String endereco;
 		Integer qtdContas = 0;
@@ -60,6 +71,7 @@ public class inserirAgencia extends HttpServlet {
     	out.println("<title>Calculo da área de uma circuferência</title>");
     	out.println("</head>");
     	out.println("<body>");
+    	out.println(statusSessao);
 		
 		try{
 			Agencia agn = new Agencia(endereco, cod, gerente, qtdContas);

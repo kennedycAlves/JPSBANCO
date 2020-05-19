@@ -53,6 +53,14 @@ public class inserirCliente extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		HttpSession sessao = request.getSession();
+		String statusSessao = (String) sessao.getAttribute("usuario_logado");
+		 
+		if(statusSessao.contentEquals("false") || statusSessao == null) {
+			  response.sendRedirect("login.jsp");
+		 }
+		
 		Integer agencia, conta;
 		Float saldo, limite;
 		String cpf;

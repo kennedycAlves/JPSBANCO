@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import model.entities.Funcionario;
 import model.dao.FuncionarioDAO;
 import model.dao.impl.FuncionarioDAOJDBC;
@@ -43,6 +45,13 @@ public class inserirFuncionario extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		HttpSession sessao = request.getSession();
+		String statusSessao = (String) sessao.getAttribute("usuario_logado");
+		 
+		if(statusSessao.contentEquals("false") || statusSessao == null) {
+			  response.sendRedirect("login.jsp");
+		 }
+		
 		Integer matricula;
 		String nome, endereco, cpf;
 		PrintWriter out;

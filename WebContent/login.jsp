@@ -17,6 +17,7 @@ HttpSession sessao = request.getSession();
 //verifica se o uauário está logado, caso o parẽmtro usuario_logado for nulo, ele seta o parâmetro false//
 if(sessao.getAttribute("usuario_logado") == null){
 	sessao.setAttribute("usuario_logado", "false");
+	
 }//Caso o usuário estiver com parâmetro setado como false, o programa irá abrir o formulário de login, para que o usuário logue.
 if (sessao.isNew() || sessao.getAttribute("usuario_logado").equals("false")){
 	out.println("<form action='executaLogin' method='post'>");

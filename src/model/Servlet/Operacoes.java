@@ -22,6 +22,7 @@ import db.*;
 @WebServlet("/Operacoes")
 public class Operacoes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -34,22 +35,28 @@ public class Operacoes extends HttpServlet {
    
     static int tipooper;
     static String cpfCLI;
+    
+ 
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession sessao = request.getSession();
-		String statusSessao = (String) request.getAttribute("usuario_logado");
+	  HttpSession sessao = request.getSession();
+	  String statusSessao = (String) sessao.getAttribute("usuario_logado");
+	 
+	  if(statusSessao.contentEquals("false") || statusSessao == null) {
+		  response.sendRedirect("login.jsp");
+	  }
+			
 		
-	
 		
 			int tipoOperacao = Integer.parseInt(request.getParameter("TipoOperacao"));
 			String cpf = (String) getServletContext().getAttribute("cpf");
 			cpfCLI = cpf;
 			tipooper = tipoOperacao;
-			if(tipoOperacao == 1 && statusSessao.equals("true")) {
+			if(tipoOperacao == 1) {
 				
 				
 				
@@ -61,6 +68,7 @@ public class Operacoes extends HttpServlet {
 		    	out.println("</head>");
 		    	out.println("<body>");
 		    	out.println(cpf);
+		    	out.println(statusSessao);
 		    	out.println("<form name='formDeposito' action='Operacoes' method='post'>");
 		    	out.println("<p>Valor do Deposito<input name='valor' type='number' id='quantity'></p>");
 		    	out.println("<input type='submit' name='btrPesquisar' value='depositar'/>");
@@ -119,8 +127,7 @@ public class Operacoes extends HttpServlet {
 		    	
 				
 				
-			}else{
-				response.sendRedirect("login.jsp");
+			
 			}
 			
 			if(tipoOperacao == 2) {
@@ -264,9 +271,9 @@ public class Operacoes extends HttpServlet {
 				
 				
 			}
+		
 			
-			
-		}
+  }
 	
 		/**
 		 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

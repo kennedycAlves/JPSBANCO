@@ -17,6 +17,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+<% 
+HttpSession sessao = request.getSession();
+String statusSessao = (String) sessao.getAttribute("usuario_logado");
+
+if(!statusSessao.equals("true")){
+	response.sendRedirect("executaLogin");
+}
+%>
 <form   name="formCadastro" action="inserirAgencia" method="post">
 
 <h2  style="text-align: center;"> Cadastro</h2>

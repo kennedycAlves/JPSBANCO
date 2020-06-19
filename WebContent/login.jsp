@@ -20,7 +20,7 @@ if(sessao.getAttribute("usuario_logado") == null){
 	
 }//Caso o usuário estiver com parâmetro setado como false, o programa irá abrir o formulário de login, para que o usuário logue.
 if (sessao.isNew() || sessao.getAttribute("usuario_logado").equals("false")){
-	out.println("<form action='executaLogin' method='post'>");
+	out.println("<form action="+response.encodeUrl("executaLogin")+" method='post'>");
 	out.println("Usuário<input type='text' name='cpf' size='20' maxlength='20'><br>");
 	out.println("Senha<input type='password' name='senha' size='20' maxlength='20'><br>");
 	out.println("<p>Tipo de login:</p>");
@@ -35,7 +35,7 @@ if (sessao.isNew() || sessao.getAttribute("usuario_logado").equals("false")){
 			
 }else{//se o usuário estiver com parãmetro true ele já estará logado
 	out.println("<h2>Olá "+sessao.getAttribute("nome_usuario")+"</h2>");
-	out.println("<a href='executaLogin'> Sair</a>");
+	out.println("<a href='DesconnectLogin'> Sair</a>");
 	out.println("<a href='operacoes.jsp'>Realizar Operações</a>");
 }
 %>

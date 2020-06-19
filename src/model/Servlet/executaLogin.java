@@ -82,7 +82,7 @@ public class executaLogin extends HttpServlet {
 					sessao.setAttribute("nome_usuario", rsResultado.getString("NOME"));
 					out.println("<h2>Bem Vindo "+rsResultado.getString("NOME"));
 					out.println("<br><br>");
-					out.println("<a href='executaLogin'> Sair</a>");
+					out.println("<a href='DesconnectLogin'> Sair</a>");
 					//out.println("<a href=\""+response.encodeURL("operacoes.jsp?cpf="+cpf+"")+"\">Realizar Operações</a>");
 					//A linha abaixo torna o atributo CPF visivel todos os Servlets da aplicação.
 					getServletContext().setAttribute("cpf", cpf);
@@ -143,7 +143,7 @@ public class executaLogin extends HttpServlet {
 					sessao.setAttribute("nome_usuario", rsResultado.getString("NOME"));
 					out.println("<h2>Bem Vindo "+rsResultado.getString("NOME"));
 					out.println("<br><br>");
-					out.println("<a href='executaLogin'> [Sair]</a>");
+					out.println("<a href='DesconnectLogin'> [Sair]</a>");
 					//out.println("<a href=\""+response.encodeURL("operacoes.jsp?cpf="+cpf+"")+"\">Realizar Operações</a>");
 					//A linha abaixo torna o atributo CPF visivel todos os Servlets da aplicação.
 					//getServletContext().setAttribute("cpf", matricula);
@@ -204,25 +204,7 @@ public class executaLogin extends HttpServlet {
 	
 	//metodo para executar a finalização do login do usuário
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out;
-		response.setContentType("text/html");
-		out = response.getWriter();
 		
-		out.println("<html>");
-		out.println("<head>");
-		out.println("<title></title>");
-		out.println("</head>");
-		out.println("<body>");
-		out.println("<p>Sessão encerrada..</p>");
-		out.println("<a href='login.jsp'> Voltar a tela de login</a>");
-		
-		HttpSession sessao = request.getSession();
-		sessao.setAttribute("usuario_logado", "false");
-		getServletContext().setAttribute("usuario_logado", "false");
-		sessao.invalidate();
-		
-		out.println("</body>");
-		out.println("</html>");
 	}
 
 }
